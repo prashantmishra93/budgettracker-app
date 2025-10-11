@@ -15,3 +15,7 @@ services:
         value: http://localhost:8000
       - key: REACT_APP_APIKEY
         value: ""
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
