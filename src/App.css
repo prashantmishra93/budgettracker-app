@@ -1,38 +1,406 @@
-.App {
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* --header-sidebar-color: rgb(82, 98, 107); Example blue color */
+  /* Game Color Combination */
+  /* --header-sidebar-color: linear-gradient(to right, #340400 30%, #69180f 50%, #340400 100%);  */
+  /* --sidebar-section-color: linear-gradient(to right, #8b2820 30%, #d06f64 50%, #96382f 100%); */
+  /* --profile-section-color: linear-gradient(to right, #8b2820 30%, #d06f64 50%, #96382f 100%); */
+  --header-sidebar-color: #01567d; /* Example blue color */
+  --section-active-color: #06343e;
+  --mainbody-color: rgb(232, 228, 223); /* Example green color */
+  --sidebar-section-color: linear-gradient(to right, #2181ad 30%, #2181ad 50%, #01567d 100%);
+  --profile-section-color: linear-gradient(to right, #2181ad 30%, #2181ad 50%, #01567d 100%);
+  --button-section-color: linear-gradient(to right, #5cc95a 30%, #21ad38 50%, #01567d 100%);
+
+  /* Error Toaster CSS color */
+  --tab-gray-border: #CBCBCB;
+  --popup-bg: #ffffff;
+  --text-color: #494949;
+}
+
+#commonToaster .error-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.error-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.error-popup-content {
+  background: var(--popup-bg);
+  padding: 5px 20px 20px;
+  width: 480px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--tab-gray-border);
+}
+
+.error-popup-content span.close {
+  float: right;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+p.message {
+  width: auto;
+  margin-inline: auto;
   text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-align: center;
+  border-bottom: 1px solid var(--tab-gray-border);
+  /* border-image: linear-gradient(to right,
+      rgba(125, 113, 113, 0),
+      rgba(255, 255, 255, 1),
+      rgba(125, 113, 113, 0)); */
+  border-image-slice: 1;
+  color: var(--text-color);
+  padding-block: 10px;
+  margin-bottom: 5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+p.error-message {
+  text-align: center;
+  padding-top: 10px;
+  color: var(--text-color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.row {
+  height : 100% !important
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.submit-btn {
+  width : 100%
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--header-sidebar-color);
+  padding: 0 15px;
+}
+
+.header img {
+  width: 180px;
+  height: 60px;
+}
+
+.profile-section {
+  display: flex;
+  gap: 10px;
+}
+
+.dashboard-body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  overflow: auto;
+}
+
+.sidebar {
+  width: 20%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  background: var(--header-sidebar-color);
+  padding: 1% 0 5% 0;
+  gap: 4px;
+  position: initial;
+  overflow: auto;
+}
+
+.main-body {
+  width: 80%;
+  height : 100vh;
+  background-color: var(--mainbody-color);
+}
+
+.body-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3%;
+  position: relative;
+  overflow: auto;
+}
+
+.page-not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card.shadow-sm {
+  width: 100%;
+}
+
+.body-card-section {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.body-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 40%;
+  padding: 0.5em;
+  gap: 0.2em;
+}
+
+.card-section .metting-card {
+  height: 300px;
+  padding: 5px;
+}
+
+.card-section .metting-card .card-body {
+  overflow-y: scroll;
+}
+
+.sidebar_section h3 {
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 28px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-links a {
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  background: var(--sidebar-section-color);
+  line-height: 60px;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar-links .active {
+  background: var(--section-active-color);
+}
+
+.profile-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.profileSection {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-sidebar {
+  width: 60%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: var(--profile-section-color); */
+}
+
+.profile-sidebar div {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 20px;
+}
+
+.profile-sidebar div a {
+  direction: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: var(--profile-section-color);
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 45px;
+}
+
+.profile-sidebar a {
+  width: 100%;
+  height: 60px;
+  background: var(--profile-section-color);
+  text-align: center;
+  line-height: 60px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.profile-sidebar a:hover {
+  background: var(--section-active-color)
+}
+
+.profile-sidebar a.active {
+  background: var(--section-active-color)
+}
+
+.profile-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.profile-update {
+  background: var(--profile-section-color);
+  color: #fff !important;
+  font-size: 18px !important;
+  text-transform: uppercase;
+  font-weight: bold !important;
+}
+
+.footer-section {
+  height: 9vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(164, 190, 238);
+  position: fixed;
+  bottom: 0;
+}
+
+.footer-section h6 {
+  font-size: 14px;
+}
+
+
+/* Tab Link Controll */
+.tab-pane .fade {
+  display: none;
+}
+
+.tab-pane .fade .active {
+  display: block;
+}
+
+.page-not-found {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.page-not-found img {
+  width: 1000px;
+  height: 450px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.width-control {
+  width: 40% !important;
+}
+
+.showBtn {
+  background: var(--profile-section-color);
+  color: #fff !important;
+  text-transform: uppercase;
+  font-weight: 800 !important;
+  letter-spacing: 1px;
+  font-size: 18px !important;
+  cursor: pointer;
+}
+
+.showBtn:hover {
+  background: var(--button-section-color);
+  transition: all 0.2 ease-in-out;
+}
+
+.cardButton {
+  width:auto;
+  height: auto;
+}
+
+/* Table CSS */
+
+.opdIpdPatientTable {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.table-header-custom {
+  background-color: var(--header-sidebar-color) !important;
+  color: #fff !important;   /* make text white */
+  height: 30px;
+}
+
+.table-header-custom th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.opdIpdPatientTable td, 
+.opdIpdPatientTable th {
+  height: 40px;            /* set your desired height */
+  vertical-align: middle;  /* keeps text vertically centered */
+}
+
+.exportButton button {
+  background: var(--header-sidebar-color);
+  width: 75px;
+  height: 35px;
+  border: none;
+  border-radius: 3px !important;
+  line-height: 17px;
 }

@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import { url } from './helper/api_helper';
+import LoginForm from './Component/LoginForm';
+import Main from './Component/Main';
 
 function App() {
+  const token = localStorage.getItem(url.USER_TOKEN)
+  const onClose = () => {
+    document.getElementById("commonToaster").style.display = "none";
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div id="commonToaster" className="error-popup" >
+        <div className="error-popup-content">
+          <span className="close" onClick={onClose}>
+            &times;
+          </span>
+          <p id="commonToasterHeading" className="message"></p>
+          <p id="commonToasterBody" className="error-message"></p>
+        </div>
+      </div>
+      {token ? (
+        <Main />
+      ) : (
+        <LoginForm />
+      )}
+    </>
   );
 }
 
