@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: react-frontend
+    env: static
+    buildCommand: npm run build && mv build tracker-build
+    staticPublishPath: tracker-build
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: REACT_APP_DEFAULTAUTH
+        value: fake
+      - key: REACT_APP_ENABLE_LOCAL_API
+        value: 0
+      - key: REACT_APP_API_URL
+        value: http://localhost:8000
+      - key: REACT_APP_APIKEY
+        value: ""
