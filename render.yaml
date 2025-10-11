@@ -3,7 +3,7 @@ services:
     name: react-frontend
     env: static
     buildCommand: npm run build
-    staticPublishPath: tracker-build
+    staticPublishPath: build
     envVars:
       - key: NODE_VERSION
         value: 20
