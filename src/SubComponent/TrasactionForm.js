@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 
 const TransactionForm = () => {
-  const [form, setForm] = useState({ type: 'income', category: '', amount: '', date: '' });
+  const [form, setForm] = useState({ type: 'Income', category: '', amount: '', date: '' });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setForm({ type: 'income', category: '', amount: '', date: '' });
+    setForm({ type: 'Income', category: '', amount: '', date: '' });
     console.log("checck form ===>", form);
     
   };
@@ -14,8 +14,8 @@ const TransactionForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <select value={form.type} onChange={e => setForm({ ...form, type: e.target.value })}>
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
+        <option value="Income">Income</option>
+        <option value="Expense">Expense</option>
       </select>
       <input type="text" placeholder="Category" value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} required />
       <input type="number" placeholder="Amount" value={form.amount} onChange={e => setForm({ ...form, amount: e.target.value })} required />
