@@ -7,7 +7,7 @@ import CategoryList from './CategoryList'
 import BudgetList from './BudgetList'
 import EntryForm from './EntryForm'
 import TrasactionForm from '../SubComponent/TrasactionForm'
-import TransactionTable from '../SubComponent/TransactionTable'
+import TransactionTable from './TransactionTable'
 import Body from '../SubComponent/Body'
 
 const Dashboard = () => {
@@ -31,11 +31,6 @@ const Dashboard = () => {
             name : "Add Budget",
             url : "/dashboard/budget",
             component : BudgetList,
-        },
-        {
-            name : "Add Entry",
-            url : "/dashboard/entries",
-            component : EntryForm,
         },
         {
             name : "Add Trasaction",

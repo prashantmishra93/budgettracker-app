@@ -1,14 +1,26 @@
 import React, {useEffect, useState} from 'react';
+import { makeApiRequest, respStatus, showMessage, url } from '../helper/api_helper';
 
 
 export default function EntryForm(){
     const [categories, setCategories] = useState([]);
+    const [budget, setBudget] = useState([]);
     const [form, setForm] = useState({category_id: '', amount: '', note: '', date: ''});
 
 
     useEffect(()=>{
-        console.log("entry");
+        fetchCategory()
     }, []);
+    
+    const fetchCategory = async () => {
+        const response = await makeApiRequest(url.USER_API.getBudgets, {}, url.API_EXTENSION)
+        console.log("budget ====>", budget);
+        if(response.status !== respStatus['SUCCESS']) {
+            showMessage(response)
+            return
+        }
+        setBudget(response?.data);
+    }
 
 
     function handleChange(e){

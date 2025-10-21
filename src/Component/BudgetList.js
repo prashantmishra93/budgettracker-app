@@ -12,7 +12,6 @@ const BudgetList = () => {
 
   const fetchCategory = async () => {
     const response = await makeApiRequest(url.USER_API.getBudgets, {}, url.API_EXTENSION)
-    console.log("response ====>", response);
     if(response.status !== respStatus['SUCCESS']) {
         showMessage(response)
         return

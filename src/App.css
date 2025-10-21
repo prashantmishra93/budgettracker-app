@@ -404,3 +404,13 @@ p.error-message {
   border-radius: 3px !important;
   line-height: 17px;
 }
+
+.filter-row {
+  height: 10% !important;
+  margin-bottom: 5px;
+}
+
+.filter-pagination {
+  height: 10% !important;
+  margin-top: 2px;
+}
