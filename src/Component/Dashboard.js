@@ -23,12 +23,12 @@ const Dashboard = () => {
             component : Body,
         },
         {
-            name : "Add Category",
+            name : "Categories",
             url : "/dashboard/category",
             component : CategoryList,
         },
         {
-            name : "Add Budget",
+            name : "Budgets",
             url : "/dashboard/budget",
             component : BudgetList,
         },

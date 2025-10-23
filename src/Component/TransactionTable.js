@@ -1,7 +1,7 @@
 // TransactionTable.js
 import React, { useEffect, useState } from 'react';
 import WLPagination from '../Common/WLPagination';
-import { Col, Form, Row, Table, Spinner } from 'react-bootstrap';
+import { Col, Form, Row, Table, Spinner, Button } from 'react-bootstrap';
 import { makeApiRequest, respStatus, url, showMessage } from '../helper/api_helper';
 
 const TransactionTable = () => {
@@ -46,6 +46,14 @@ const TransactionTable = () => {
       page: newPage
     }));
   };
+
+  const handleFilter = () => {
+    let editForm = {...formData}
+    editForm['category'] = filter?.category;
+    editForm['date'] = filter?.date
+    editForm['amount'] = filter?.amount
+    setFormData(editForm);
+  }
   return (
     <>
       <Row className="filter-row">
@@ -71,6 +79,14 @@ const TransactionTable = () => {
               type="date"
               onChange={e => setFilter({ ...filter, date: e.target.value })}
             />
+          </Col>
+          <Col>
+            <Button
+              className="btn btn-primary"
+              onClick={() => handleFilter()}
+            >
+              {"Search"}
+            </Button>
           </Col>
         </Form>
       </Row>
