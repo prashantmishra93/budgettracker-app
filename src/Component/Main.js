@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../redux/userSlice/getUser';
 import RouterModel from '../SubComponent/RouterModel';
 import Loading from '../Common/Loding';
