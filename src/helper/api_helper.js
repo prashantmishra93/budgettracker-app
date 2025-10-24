@@ -12,10 +12,7 @@ export const respStatus = {
 const baseUrl = "https://budgettracker-api.onrender.com";
 
 const axiosApi = axios.create({
-    baseURL:
-        process.env.REACT_APP_ENABLE_LOCAL_API === 1
-            ? process.env.REACT_APP_API_URL
-            : baseUrl
+    baseURL: baseUrl
 });
 
 axiosApi.interceptors.response.use(
