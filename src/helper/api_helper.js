@@ -9,7 +9,8 @@ export const respStatus = {
   NOT_AUTHORISED: "You are not authorised.",
 };
 
-const baseUrl = "https://budgettracker-api.onrender.com";
+const baseUrl2 = window.location.origin;
+const baseUrl = process.env.REACT_APP_API_URL || 'https://budgettracker-api.onrender.com';
 
 const axiosApi = axios.create({
     baseURL: baseUrl
@@ -30,13 +31,14 @@ const makeApiRequest = (
       axiosApi.defaults.headers.common['Authorization'] = token
     }
     let finalURL = url.API_PREFIX + microservice + extension
+    console.log("final url ====>", finalURL, url.API_PREFIX, microservice, extension, process.env.REACT_APP_API_URL);
 
     return axiosApi.post(finalURL, payLoad)
           .then((response) => {
             // Correct app-level status check
             if (response.data.status === "ERROR" && response.data.message === "token_expired") {
               localStorage.removeItem(url.USER_TOKEN);
-              window.location.href = baseUrl + "/";
+              window.location.href = baseUrl2 + "/";
             }
             // ✅ Return data so caller gets it
             return response?.headers ? response?.data : response;
@@ -58,7 +60,7 @@ const generateCatchMsg = (err) => {
         break;
       case 401:
         localStorage.removeItem(url.USER_TOKEN);
-        window.location.href = baseUrl + "/";
+        window.location.href = baseUrl2 + "/";
         message = "Invalid credentials";
         break;
       case 403:
