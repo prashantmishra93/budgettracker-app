@@ -9,7 +9,7 @@ export const respStatus = {
   NOT_AUTHORISED: "You are not authorised.",
 };
 
-const baseUrl = window.location.origin;
+const baseUrl = "https://budgettracker-api.onrender.com";
 
 const axiosApi = axios.create({
     baseURL:
