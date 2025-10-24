@@ -7,6 +7,7 @@ module.exports = function (app) {
             // target: 'http://localhost:8000/api',
             target: 'https://budgettracker-api.onrender.com',
             changeOrigin: true,
+            pathRewrite: { '^/api': '' },
         })
     );
 };
