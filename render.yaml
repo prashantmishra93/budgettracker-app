@@ -3,7 +3,7 @@ services:
     name: pacific-budget-tracker-app
     env: static
     buildCommand: npm run build
-    staticPublishPath: build
+    staticPublishPath: build  # Ensure the React build output is published
     envVars:
       - key: NODE_VERSION
         value: 20
@@ -12,10 +12,10 @@ services:
       - key: REACT_APP_ENABLE_LOCAL_API
         value: 0
       - key: REACT_APP_API_URL
-        value: http://localhost:8000
+        value: https://budgettracker-api.onrender.com
       - key: REACT_APP_APIKEY
         value: ""
     routes:
       - type: rewrite
-        source: /*
-        destination: /index.html
+        source: /*  # Catch-all route
+        destination: /index.html  # Ensure all React Router routes are handled by React
