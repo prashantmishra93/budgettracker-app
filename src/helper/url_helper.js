@@ -12,10 +12,12 @@ export const USER_API = {
     getEntries : "/getEntries",
     entriesSummary : "/entriesSummary",
     entries : "/entries",
-    getBudgets : "/getBudgets"
+    getBudgets : "/getBudgets",
+    allUsers : "/allUsers",
 }
 
 export const NON_AUTHENTICATE_URL = [
     "register",
-    "login"
+    "login",
+    "allUsers"
 ]
