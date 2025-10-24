@@ -10,7 +10,7 @@ services:
       - key: REACT_APP_DEFAULTAUTH
         value: fake
       - key: REACT_APP_ENABLE_LOCAL_API
-        value: 0
+        value: 1
       - key: REACT_APP_API_URL
         value: https://budgettracker-api.onrender.com
       - key: REACT_APP_APIKEY
