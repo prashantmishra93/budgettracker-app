@@ -14,7 +14,7 @@ const Main = () => {
     
   // Display a loading state until user details are fetched
     if (!user) {
-        return <Loding />;
+        return <Loading />;
     }
     
     return (
