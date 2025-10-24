@@ -136,12 +136,37 @@ p.error-message {
   gap: 4px;
   position: initial;
   overflow: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-mobile {
+  display: none;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+}
+
+.sidebar-links a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .main-body {
   width: 80%;
   height : 100vh;
   background-color: var(--mainbody-color);
+  overflow-y: auto;
 }
 
 .body-section {
@@ -413,4 +438,87 @@ p.error-message {
 .filter-pagination {
   height: 10% !important;
   margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .sidebar_section h3 {
+    display:none;
+  }
+
+  /* Sidebar hidden by default */
+  .sidebar {
+    width: 65% !important;
+    height: 100vh !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--header-sidebar-color);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.25);
+    margin-top: 35px;
+  }
+
+  /* Sidebar visible when toggled */
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .main-body {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Mobile header bar */
+  .sidebar-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: var(--header-sidebar-color);
+    color: white;
+    height: 60px;
+    padding: 0 15px;
+    gap: 10px;
+    z-index: 1100;
+  }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+  }
+
+  .mobile-title {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* Optional overlay behind sidebar for better UX */
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 900;
+  }
+
+  .overlay.show {
+    display: block;
+  }
 }

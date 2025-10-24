@@ -116,7 +116,9 @@ const TransactionTable = () => {
                     <td>{t.category_name}</td>
                     <td>{t.type}</td>
                     <td>{t.amount}</td>
-                    <td>{t.note}</td>
+                    <td style={{ whiteSpace: 'normal', wordBreak: 'break-word', maxWidth: '180px' }}>
+                      {t.note}
+                    </td>
                   </tr>
               ))) : (
                 <tr className="text-center">

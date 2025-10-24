@@ -166,7 +166,7 @@ const BarChart = () => {
   }, [yearData, selectedYear]);
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", overflow:"auto" }}>
       <h3 className="mt-3">Yearly Financial Overview</h3>
 
       {(chartYear.length > 0) && (

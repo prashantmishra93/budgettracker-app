@@ -15,6 +15,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [showPanel, setShowPanel] = useState(Body)
+    const [showSidebar, setShowSidebar] = useState(false);
 
     const sidebarSections = [
         {
@@ -47,6 +48,7 @@ const Dashboard = () => {
     const handleProfilePage = (section, extension) => {
         setShowPanel(() => section)
         navigate(extension)
+        setShowSidebar(false);
     }
     
     useEffect(() => {
@@ -59,10 +61,20 @@ const Dashboard = () => {
         }
     }, [location.pathname, navigate]);
 
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!e.target.closest(".sidebar") && !e.target.closest(".menu-toggle")) {
+                setShowSidebar(false);
+            }
+        };
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
+
     return (
         (profile?.username ? (
             <div className="dashboard-body">
-                <div className="sidebar">
+                <div className={`sidebar ${showSidebar ? 'show' : ''}`}>
                     <div className="sidebar_section">
                         <h3>{profile ? profile?.username.toUpperCase() : ''}</h3>
                     </div>
@@ -79,6 +91,17 @@ const Dashboard = () => {
                             ))
                         }
                     </div>
+                </div>
+                <div className="sidebar-mobile">
+                    <button
+                    className="menu-toggle"
+                    onClick={() => setShowSidebar(!showSidebar)}
+                    >
+                        ☰
+                    </button>
+                    <h4 className="mobile-title">
+                        {profile ? profile?.username?.toUpperCase() : "Dashboard"}
+                    </h4>
                 </div>
                 <div className="main-body">
                     <div className="body-section">
