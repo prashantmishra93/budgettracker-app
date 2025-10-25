@@ -5,10 +5,10 @@ import Loading from '../Common/Loding';
 import MainBody from '../SubComponent/MainBody'
 import CategoryList from './CategoryList'
 import BudgetList from './BudgetList'
-import EntryForm from './EntryForm'
 import TrasactionForm from '../SubComponent/TrasactionForm'
 import TransactionTable from './TransactionTable'
 import Body from '../SubComponent/Body'
+import { Button } from 'react-bootstrap';
 
 const Dashboard = () => {
     const profile = useSelector((state) => state.userSlice.user);
@@ -71,6 +71,11 @@ const Dashboard = () => {
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
+    const hanldeLogoutClick = () => {
+        localStorage.removeItem("token")
+        window.location.reload();
+    }
+
     return (
         (profile?.username ? (
             <div className="dashboard-body">
@@ -90,6 +95,11 @@ const Dashboard = () => {
                                 </NavLink>
                             ))
                         }
+                    </div>
+                    <div>
+                        <Button className="btn btn-primary" onClick={() => hanldeLogoutClick()}>
+                            Logout
+                        </Button>
                     </div>
                 </div>
                 <div className="sidebar-mobile">
