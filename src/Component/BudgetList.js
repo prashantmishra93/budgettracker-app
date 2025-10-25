@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import BudgetForm from '../SubComponent/BudgetForm';
 import { makeApiRequest, respStatus, showMessage, url } from '../helper/api_helper';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 const BudgetList = () => {
   const [budget, setBudget] = useState([]);
@@ -22,6 +25,37 @@ const BudgetList = () => {
   const handleAddBudget = (newCategory) => {
     setBudget((prev) => [...prev, newCategory]);
   };
+  
+  const handleDeleteBudget = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    // If user cancels, stop here
+    if (!result.isConfirmed) return;
+    const response = await makeApiRequest(url.USER_API.deleteBudget, {id:id}, url.API_EXTENSION)
+    if(response) {
+      if(response.status !== respStatus['SUCCESS']) {
+          showMessage(response)
+          return
+      }
+      Swal.fire({
+        icon: "success",
+        title: "Deleted!",
+        text: "Budget deleted successfully.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      if (fetchCategory) fetchCategory();
+    }
+  }
 
   return (
     <div className="container mt-4">
@@ -34,6 +68,7 @@ const BudgetList = () => {
               <th><h5>Year</h5></th>
               <th><h5>Month</h5></th>
               <th><h5>Amount</h5></th>
+              <th><h5>Action</h5></th>
             </tr>
           </thead>
           <tbody>
@@ -44,11 +79,14 @@ const BudgetList = () => {
                         <td>{cat?.year}</td>
                         <td>{cat?.month || '—'}</td>
                         <td>{cat?.amount || '—'}</td>
+                        <td>
+                          <FontAwesomeIcon onClick={() => handleDeleteBudget(cat?.id)} icon={faTrash} />
+                        </td>
                     </tr>
                 ))
             ) : (
                 <tr className="text-center">
-                    <td colSpan="4">
+                    <td colSpan="5">
                         <h6>No Data Found</h6>
                     </td>
                 </tr>

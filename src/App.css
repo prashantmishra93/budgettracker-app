@@ -440,6 +440,21 @@ p.error-message {
   margin-top: 2px;
 }
 
+.fa-trash {
+  cursor: pointer;
+  color: #dc3545;
+}
+
+.logout-btn {
+  padding : 0 0 0 10px;
+}
+
+.trans-note {
+  white-space: normal;
+  word-break: break-word;
+  max-width: 200px;
+}
+
 @media (max-width: 768px) {
   .dashboard-body {
     display: flex;
@@ -520,5 +535,13 @@ p.error-message {
 
   .overlay.show {
     display: block;
+  }
+
+  .trans-form .col input {
+    width : 120px;
+  }
+  
+  .trans-note {
+    display: none;
   }
 }

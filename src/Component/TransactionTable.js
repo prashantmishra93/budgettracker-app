@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import WLPagination from '../Common/WLPagination';
 import { Col, Form, Row, Table, Spinner, Button } from 'react-bootstrap';
 import { makeApiRequest, respStatus, url, showMessage } from '../helper/api_helper';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 const TransactionTable = () => {
   const [filter, setFilter] = useState({ category: '', amount: '', date: '' });
@@ -54,10 +57,42 @@ const TransactionTable = () => {
     editForm['amount'] = filter?.amount
     setFormData(editForm);
   }
+  
+  const handleDeleteTransation = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    // If user cancels, stop here
+    if (!result.isConfirmed) return;
+    const response = await makeApiRequest(url.USER_API.deleteTransaction, {id:id}, url.API_EXTENSION)
+    if(response) {
+      if(response.status !== respStatus['SUCCESS']) {
+          showMessage(response)
+          return
+      }
+      Swal.fire({
+        icon: "success",
+        title: "Deleted!",
+        text: "Budget deleted successfully.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      if (fetchCategory) fetchCategory();
+    }
+  }
+
   return (
     <>
       <Row className="filter-row">
-        <Form className="d-flex flex-wrap gap-2">
+        <Form className="d-flex flex-wrap gap-2 trans-form">
           <Col>
             <Form.Control
               type="text"
@@ -99,7 +134,8 @@ const TransactionTable = () => {
               <th>Category</th>
               <th>Type</th>
               <th>Amount</th>
-              <th>Note</th>
+              <th className="trans-note">Note</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody className="text-center">
@@ -116,13 +152,16 @@ const TransactionTable = () => {
                     <td>{t.category_name}</td>
                     <td>{t.type}</td>
                     <td>{t.amount}</td>
-                    <td style={{ whiteSpace: 'normal', wordBreak: 'break-word', maxWidth: '180px' }}>
+                    <td className="trans-note">
                       {t.note}
+                    </td>
+                    <td>
+                      <FontAwesomeIcon onClick={() => handleDeleteTransation(t?.id)} icon={faTrash} />
                     </td>
                   </tr>
               ))) : (
                 <tr className="text-center">
-                  <td colSpan="6">No Data Found</td>
+                  <td colSpan="7">No Data Found</td>
                 </tr>
               )
             )}

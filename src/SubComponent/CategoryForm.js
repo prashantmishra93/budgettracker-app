@@ -19,7 +19,6 @@ const CategoryForm = ({ onAddCategory }) => {
     };
 
     const response = await makeApiRequest(url.USER_API.addCategories, newCategory, url.API_EXTENSION)
-    console.log("response ====>", response);
     if(response) {
         if(response.status !== respStatus['SUCCESS']) {
             showMessage(response)

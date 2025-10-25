@@ -31,7 +31,6 @@ const makeApiRequest = (
       axiosApi.defaults.headers.common['Authorization'] = token
     }
     let finalURL = url.API_PREFIX + microservice + extension
-    console.log("final url ====>", finalURL, url.API_PREFIX, microservice, extension, process.env.REACT_APP_API_URL);
 
     return axiosApi.post(finalURL, payLoad)
           .then((response) => {

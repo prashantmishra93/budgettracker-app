@@ -96,7 +96,7 @@ const Dashboard = () => {
                             ))
                         }
                     </div>
-                    <div>
+                    <div className="logout-btn">
                         <Button className="btn btn-primary" onClick={() => hanldeLogoutClick()}>
                             Logout
                         </Button>

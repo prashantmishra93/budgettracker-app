@@ -3,24 +3,34 @@ import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { makeApiRequest, url, respStatus, showMessage } from '../helper/api_helper';
 
 const BudgetForm = ({ onAddBudget }) => {
-  const [year, setYear] = useState('');
-  const [month, setMonth] = useState('');
-  const [amount, setAmount] = useState('');
+  const initForm = {year:'', month:'', amount:''}
+  const [form, setForm] = useState(initForm);
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!year.trim()) {
-      setMessage('Budget name is required.');
+    
+    const yearVal = form.year.trim();
+    const monthVal = form.month.trim();
+    const amountVal = form.amount.trim();
+
+    if (!/^\d{4}$/.test(yearVal)) {
+      setMessage("❌ Please enter a valid 4-digit year (e.g., 2025).");
       return;
     }
-    const newCategory = {
-      year: year.trim(),
-      month: month.trim(),
-      amount: amount.trim(),
-    };
 
-    const response = await makeApiRequest(url.USER_API.addBudget, newCategory, url.API_EXTENSION)
+    const monthNum = parseInt(monthVal, 10);
+    if (!monthVal || isNaN(monthNum) || monthNum < 1 || monthNum > 12) {
+      setMessage("❌ Please enter a valid month (1–12).");
+      return;
+    }
+
+    if (!/^\d+(\.\d+)?$/.test(amountVal) || parseFloat(amountVal) <= 0) {
+      setMessage("❌ Please enter a valid positive amount.");
+      return;
+    }
+
+    const response = await makeApiRequest(url.USER_API.addBudget, form, url.API_EXTENSION)
     if(response) {
         if(response.status !== respStatus['SUCCESS']) {
             showMessage(response)
@@ -29,13 +39,19 @@ const BudgetForm = ({ onAddBudget }) => {
         if (onAddBudget) onAddBudget(response?.data);
 
         setMessage('✅ Budget added successfully!');
-        setYear('')
-        setMonth('')
-        setAmount('')
+        setForm(initForm)
 
         setTimeout(() => setMessage(''), 2000);
     }
   };
+
+  const handleOnChange = (name, value) => {
+    setForm({
+      ...form,
+      [name] : value
+    })
+    setMessage('')
+  }
 
   return (
     <Card className="shadow p-4 rounded-3">
@@ -53,8 +69,8 @@ const BudgetForm = ({ onAddBudget }) => {
           <Form.Control
             type="text"
             placeholder="Enter Year"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
+            value={form.year}
+            onChange={(e) => handleOnChange('year', e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -62,8 +78,8 @@ const BudgetForm = ({ onAddBudget }) => {
           <Form.Control
             type="text"
             placeholder="Enter Month"
-            value={month}
-            onChange={(e) => setMonth(e.target.value)}
+            value={form.month}
+            onChange={(e) => handleOnChange('month', e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -71,8 +87,8 @@ const BudgetForm = ({ onAddBudget }) => {
           <Form.Control
             type="text"
             placeholder="Enter Amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            value={form.amount}
+            onChange={(e) => handleOnChange('amount', e.target.value)}
           />
         </Form.Group>
         <div className="d-flex justify-content-center">
