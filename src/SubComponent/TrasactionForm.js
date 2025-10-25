@@ -32,19 +32,25 @@ const TransactionForm = () => {
     setMessage('')
     let payLoad = {...form}
     e.preventDefault();
-    if (!form.type.trim()) {
+    
+    const typeVal = form.type.trim();
+    const catVal = form.category.trim();
+    const amountVal = form.amount.trim();
+    const dateVal = form.date.trim();
+
+    if (!typeVal) {
       setMessage('Type must required.');
       return;
     }
-    if (!form.category.trim()) {
+    if (!catVal) {
       setMessage('Category must required.');
       return;
     }
-    if (!form.amount.trim()) {
-      setMessage('Amount must required.');
+    if (!/^\d+(\.\d+)?$/.test(amountVal) || parseFloat(amountVal) <= 0) {
+      setMessage("❌ Please enter a valid positive amount.");
       return;
     }
-    if (!form.date.trim()) {
+    if (!dateVal) {
       setMessage('Date must required.');
       return;
     }
@@ -108,10 +114,10 @@ const TransactionForm = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Amount</Form.Label>
+          <Form.Label>Date</Form.Label>
           <Form.Control
             type="date"
-            placeholder="Enter Amount"
+            placeholder="Enter Date"
             value={form.date}
             onChange={e => setForm({ ...form, date: e.target.value })}
           />
