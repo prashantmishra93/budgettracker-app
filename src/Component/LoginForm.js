@@ -8,7 +8,6 @@ import {
     MDBContainer, 
     MDBCol, 
     MDBRow, 
-    MDBBtn,
     MDBTabs,
     MDBTabsItem,
     MDBTabsLink,
