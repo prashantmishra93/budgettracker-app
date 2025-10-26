@@ -3,15 +3,18 @@ import { Row, Spinner, Table } from 'react-bootstrap';
 import CategoryForm from '../SubComponent/CategoryForm';
 import { makeApiRequest, respStatus, showMessage, url } from '../helper/api_helper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPencil } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import WLPagination from '../Common/WLPagination';
+import Popup from '../Common/Popup';
 
 const CategoryList = () => {
   const initForm = {per_page:10, page:1}
   const [formData, setFormData] = useState(initForm)
   const [categories, setCategories] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showCategoryPopup, setShowCategoryPopup] = useState(false);
+  const [categoryId, setCategoryId] = useState(null)
 
   useEffect(() => {
     fetchCategory()
@@ -84,6 +87,11 @@ const CategoryList = () => {
     }));
   };
 
+  const handleEditCat = (id) => {
+    setCategoryId(id);
+    setShowCategoryPopup(true);
+  }
+
   return (
     <>
       <CategoryForm onAddCategory={handleAddCategory} />
@@ -111,6 +119,8 @@ const CategoryList = () => {
                           <td>{cat?.type || '—'}</td>
                           <td>
                             <FontAwesomeIcon onClick={() => handleDeleteCat(cat?.id)} icon={faTrash} />
+                            &nbsp;
+                            <FontAwesomeIcon onClick={() => handleEditCat(cat?.id)} icon={faPencil} />
                           </td>
                       </tr>
                   ))
@@ -133,6 +143,14 @@ const CategoryList = () => {
             pageChange={pageChange}
           />
         </Row>
+      )}
+      {(showCategoryPopup && categoryId) && (
+        <Popup 
+          onClose={() => setShowCategoryPopup(false)} 
+          popupType="categoryPopup"
+          title="Edit Category"
+          query={categoryId} 
+          onRefresh={fetchCategory} />
       )}
     </>
   );

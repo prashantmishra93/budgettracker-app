@@ -2,7 +2,7 @@ import React from "react";
 import "../assets/css/LoadingBar.css";
 
 const Loading = () => {
-    const name = "PRASHANT";
+    const name = "TRACKER";
 
     return (
         <div className="wave-container">

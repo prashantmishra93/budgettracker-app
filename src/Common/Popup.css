@@ -1,0 +1,123 @@
+/* Full-screen dark overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Popup box */
+.popup-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  max-width: 90%;
+  animation: popupFadeIn 0.25s ease-in-out;
+  overflow: hidden;
+}
+
+/* Header section */
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #007bff;
+  color: white;
+  padding: 14px 20px;
+}
+
+.popup-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.close-icon {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.close-icon:hover {
+  transform: scale(1.1);
+  color: #ffcccc;
+}
+
+/* Popup body */
+.popup-body {
+  padding: 20px;
+}
+
+/* Edit form styling */
+.edit-category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-category-form label {
+  font-weight: 600;
+}
+
+.edit-category-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+.edit-category-form input:focus {
+  border-color: #007bff;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-save,
+.btn-cancel {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-save {
+  background: #007bff;
+  color: white;
+}
+
+.btn-cancel {
+  background: #e4e4e4;
+}
+
+.btn-save:hover {
+  background: #0056b3;
+}
+
+.btn-cancel:hover {
+  background: #d6d6d6;
+}
+
+/* Animation */
+@keyframes popupFadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

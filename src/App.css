@@ -445,6 +445,11 @@ p.error-message {
   color: #dc3545;
 }
 
+.fa-pencil {
+  cursor: pointer;
+  color: #359fdc;
+}
+
 .logout-btn {
   padding : 0 0 0 10px;
 }

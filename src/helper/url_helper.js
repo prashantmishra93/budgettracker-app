@@ -16,7 +16,9 @@ export const USER_API = {
     allUsers : "/allUsers",
     deleteCategory : "/deleteCategory",
     deleteBudget : "/deleteBudget",
-    deleteTransaction : "/deleteTransaction"
+    deleteTransaction : "/deleteTransaction",
+    getByIdCategory : "/getByIdCategory",
+    updateCategory : "/updateCategory",
 }
 
 export const NON_AUTHENTICATE_URL = [
