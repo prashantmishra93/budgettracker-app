@@ -34,7 +34,7 @@ const BudgetList = () => {
   }
 
   const handleAddBudget = (newCategory) => {
-    setBudget((prev) => [...prev, newCategory]);
+    fetchCategory();
   };
   
   const handleDeleteBudget = async (id) => {
