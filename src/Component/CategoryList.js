@@ -37,7 +37,7 @@ const CategoryList = () => {
   }
 
   const handleAddCategory = (newCategory) => {
-    setCategories((prev) => [...prev, newCategory]);
+    fetchCategory()
   };
 
   const handleDeleteCat = async (id) => {

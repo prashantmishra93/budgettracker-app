@@ -20,7 +20,7 @@ const TransactionForm = () => {
         showMessage(response)
         return
     }
-    setCategories(response?.data);
+    setCategories(response?.data?.entries || []);
   }
 
   useEffect(() => {
