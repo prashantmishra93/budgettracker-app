@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #007bff;
+  background: var(--header-sidebar-color);
   color: white;
   padding: 14px 20px;
 }

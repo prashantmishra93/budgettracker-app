@@ -4,8 +4,9 @@ import WLPagination from '../Common/WLPagination';
 import { Col, Form, Row, Table, Spinner, Button } from 'react-bootstrap';
 import { makeApiRequest, respStatus, url, showMessage } from '../helper/api_helper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPencil } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import Popup from '../Common/Popup';
 
 const TransactionTable = () => {
   const [filter, setFilter] = useState({ category: '', amount: '', date: '' });
@@ -13,6 +14,8 @@ const TransactionTable = () => {
   const [formData, setFormData] = useState(initForm)
   const [transactions, setTransactions] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showTransactionPopup, setShowTransactionPopup] = useState(false);
+  const [transactionId, setTransactionId] = useState(null)
   
   useEffect(()=>{
       fetchCategory()
@@ -88,6 +91,11 @@ const TransactionTable = () => {
       if (fetchCategory) fetchCategory();
     }
   }
+  
+  const handleEditTransaction = (id) => {
+    setTransactionId(id);
+    setShowTransactionPopup(true);
+  }
 
   return (
     <>
@@ -157,6 +165,8 @@ const TransactionTable = () => {
                     </td>
                     <td>
                       <FontAwesomeIcon onClick={() => handleDeleteTransation(t?.id)} icon={faTrash} />
+                      &nbsp;
+                      <FontAwesomeIcon onClick={() => handleEditTransaction(t?.id)} icon={faPencil} />
                     </td>
                   </tr>
               ))) : (
@@ -176,6 +186,14 @@ const TransactionTable = () => {
             pageChange={pageChange}
           />
         </Row>
+      )}
+      {(showTransactionPopup && transactionId) && (
+        <Popup 
+          onClose={() => setShowTransactionPopup(false)} 
+          popupType="transactionPopup"
+          title="Edit Transaction"
+          query={transactionId} 
+          onRefresh={fetchCategory} />
       )}
     </>
   );

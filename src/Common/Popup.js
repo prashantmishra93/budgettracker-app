@@ -1,8 +1,9 @@
 import React from "react";
-import "./Popup.css";
+import "../assets/css/Popup.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import EditCategory from "../Popup/EditCategory";
+import EditTransaction from "../Popup/EditTransaction";
 
 const Popup = ({ onClose, popupType, title, query=null, onRefresh=null }) => {
   return (
@@ -19,6 +20,9 @@ const Popup = ({ onClose, popupType, title, query=null, onRefresh=null }) => {
         <div className="popup-body">
             {popupType === "categoryPopup" && (
                 <EditCategory id={query} onClose={onClose} onRefresh={onRefresh} />
+            )}
+            {popupType === "transactionPopup" && (
+                <EditTransaction id={query} onClose={onClose} onRefresh={onRefresh} />
             )}
         </div>
       </div>
