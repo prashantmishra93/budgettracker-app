@@ -21,6 +21,7 @@ export const USER_API = {
     updateCategory : "/updateCategory",
     getTransactionById : "/getTransactionById",
     updateTransaction : "/updateTransaction",
+    chatboot : "/chatboot",
 }
 
 export const NON_AUTHENTICATE_URL = [

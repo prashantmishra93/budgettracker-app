@@ -147,7 +147,7 @@ const LoginForm = ({ onLogin }) => {
                                     <br/>
                                     <button type="submit" className="btn btn-primary w-100">Submit</button>
                                 </form>
-                                {/* <p className="text-center">Not a member? <a href="#!" onClick={() => handleJustifyClick('register')}>Register</a></p> */}
+                                <p className="text-center">Not a member? <a href="#!" onClick={() => handleJustifyClick('register')}>Register</a></p>
                             </div>
 
                             <div className={justifyActive === 'register' ? 'tab-pane active m-4' : 'tab-pane m-4'}>

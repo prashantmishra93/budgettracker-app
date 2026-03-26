@@ -10,7 +10,7 @@ export const respStatus = {
 };
 
 const baseUrl2 = window.location.origin;
-const baseUrl = process.env.REACT_APP_API_URL || 'https://budgettracker-api.onrender.com';
+const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const axiosApi = axios.create({
     baseURL: baseUrl

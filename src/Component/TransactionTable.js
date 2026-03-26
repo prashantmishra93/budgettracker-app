@@ -148,7 +148,7 @@ const TransactionTable = () => {
           </thead>
           <tbody className="text-center">
             {loading ? (
-              <td colSpan="6" className="py-4">
+              <td colSpan="7" className="py-4">
                 <Spinner animation="border" variant="primary" />
               </td>
             ) : (

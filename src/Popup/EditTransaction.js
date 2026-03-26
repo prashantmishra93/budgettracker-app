@@ -133,7 +133,7 @@ const EditTransaction = ({id, onClose, onRefresh}) => {
     return (
         <Card className="shado p-2 rounded-3">
             <Card.Title className="mb-3 text-center fs-4 fw-bold">
-               Update Category
+               Update Transaction
             </Card.Title>
             {message && (
                 <Alert variant={message.includes('successfully') ? 'success' : 'danger'}>
