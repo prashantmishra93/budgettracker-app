@@ -13,14 +13,15 @@ const Main = () => {
     
     const token = localStorage.getItem(url.USER_TOKEN);
 
+    useEffect(() => {
+        dispatch(getUser());
+    }, [dispatch])
+
+    
     // 🔥 STEP 1: Block access if no token
     if (!token) {
         return <Navigate to="/" replace />;
     }
-
-    useEffect(() => {
-        dispatch(getUser());
-    }, [dispatch])
     
   // Display a loading state until user details are fetched
     if (!user && loading) {
