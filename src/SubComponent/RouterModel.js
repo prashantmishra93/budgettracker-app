@@ -9,12 +9,12 @@ function RouterModel()
     return (
         <>
             <Routes>
-                <Route path="/dashboard" element={ <TokenAuth component={Dashboard} /> } />
-                <Route path="/dashboard/category" element={ <TokenAuth component={Dashboard} /> } />
-                <Route path="/dashboard/entries" element={ <TokenAuth component={Dashboard} /> } />
-                <Route path="/dashboard/budget" element={ <TokenAuth component={Dashboard} /> } />
-                <Route path="/dashboard/transaction" element={ <TokenAuth component={Dashboard} /> } />
-                <Route path="/dashboard/transactions" element={ <TokenAuth component={Dashboard} /> } />
+                <Route index element={<TokenAuth component={Dashboard} />} />
+                <Route path="category" element={ <TokenAuth component={Dashboard} /> } />
+                <Route path="entries" element={ <TokenAuth component={Dashboard} /> } />
+                <Route path="budget" element={ <TokenAuth component={Dashboard} /> } />
+                <Route path="transaction" element={ <TokenAuth component={Dashboard} /> } />
+                <Route path="transactions" element={ <TokenAuth component={Dashboard} /> } />
                 <Route path="*" element={ <NotFound /> } />
             </Routes>
         </>

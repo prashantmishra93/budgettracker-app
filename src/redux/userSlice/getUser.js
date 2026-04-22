@@ -13,6 +13,11 @@ export const getUser = createAsyncThunk('api/getUser', async () => {
         }
         return response;
     } catch (error) {
-        console.log("error ===>", error);
+        if (error.response?.status === 401) {
+            localStorage.removeItem(url.USER_TOKEN);
+            window.location.href = "/";
+            return;
+        }
+        showMessage("Something went wrong", "error", "error");
     }
 })
