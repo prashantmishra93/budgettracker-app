@@ -8,11 +8,21 @@ const BarChart = () => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [loading, setLoading] = useState(false);
   const [chartYear, setChartYear] = useState([])
+  const token = localStorage.getItem(url.USER_TOKEN)
 
-  // Fetch all year summary data
+  // Initial load
   useEffect(() => {
-    fetchSummary();
-  }, []);
+    if (token) {
+      fetchSummary();
+    }
+  }, [token]);
+
+  // When year changes
+  useEffect(() => {
+    if (token && selectedYear) {
+      fetchSummary(selectedYear);
+    }
+  }, [selectedYear]);
 
   const fetchSummary = async (year = null) => {
     try {
@@ -26,8 +36,9 @@ const BarChart = () => {
       }
       setCharts(response.data || []);
       setChartYear(response?.extraData || []);
-      if (!selectedYear && response.data.length > 0) {
-        setSelectedYear(response.data[0].year); // default to first year
+      if (response.data?.length > 0) {
+        const defaultYear = year || response.data[0].year;
+        setSelectedYear((prev) => prev ?? defaultYear);
       }
     } catch (error) {
       console.error(error);
@@ -36,10 +47,6 @@ const BarChart = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchSummary(selectedYear)
-  }, [selectedYear])
 
   // Filter month data for selected year
   const yearData = charts.find((y) => y.year === selectedYear)?.months || [];

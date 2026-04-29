@@ -1,8 +1,9 @@
 import './App.css';
+import { url } from './helper/api_helper';
 import LoginForm from './Component/LoginForm';
 import Main from './Component/Main';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
+  const token = localStorage.getItem(url.USER_TOKEN)
   const onClose = () => {
     document.getElementById("commonToaster").style.display = "none";
   };
@@ -18,12 +19,11 @@ function App() {
           <p id="commonToasterBody" className="error-message"></p>
         </div>
       </div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LoginForm />} />
-          <Route path="/dashboard/*" element={<Main />} />
-        </Routes>
-      </BrowserRouter>
+      {token ? (
+        <Main />
+      ) : (
+        <LoginForm />
+      )}
     </>
   );
 }

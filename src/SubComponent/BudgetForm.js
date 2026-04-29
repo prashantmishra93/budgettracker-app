@@ -56,7 +56,7 @@ const BudgetForm = ({ onAddBudget }) => {
   return (
     <Card className="shadow p-4 rounded-3">
       <Card.Title className="mb-3 text-center fs-4 fw-bold">
-        Add New Category
+        Add New Budget
       </Card.Title>
       {message && (
         <Alert variant={message.includes('successfully') ? 'success' : 'danger'}>
